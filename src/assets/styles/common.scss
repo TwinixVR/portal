@@ -1,0 +1,112 @@
+:root {
+  font-family: PingFangSC-Regular, Roboto, 'Helvetica Neue', Helvetica, Tahoma, Arial, 'PingFang SC-Light',
+    'Microsoft YaHei';
+  font-weight: 400;
+  line-height: 1.5;
+  color: rgb(255 255 255 / 87%);
+  color-scheme: light dark;
+  background-color: #242424;
+  font-synthesis: none;
+  text-rendering: optimizelegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+textarea,
+p,
+blockquote,
+th,
+td,
+hr,
+button,
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  min-height: 100vh;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  margin: 0;
+}
+
+button {
+  padding: 0.6em 1.2em;
+  font-family: inherit;
+  font-size: 1em;
+  font-weight: 500;
+  cursor: pointer;
+  background-color: #1a1a1a;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  transition: border-color 0.25s;
+}
+
+button:hover {
+  border-color: #646cff;
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+#app {
+  padding: 0;
+  margin: 0 auto;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #fff;
+  }
+
+  a:hover {
+    color: #747bff;
+  }
+
+  button {
+    background-color: #f9f9f9;
+  }
+}

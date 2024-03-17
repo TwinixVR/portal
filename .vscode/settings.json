@@ -17,7 +17,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[xml]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "DotJoshJohnson.xml"
   },
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"

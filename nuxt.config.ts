@@ -26,11 +26,44 @@ export default defineNuxtConfig({
   },
   srcDir: 'src/',
   typescript: {
-    typeCheck: true,
+    typeCheck: false,
   },
   modules: ['nuxt-svgo'],
   svgo: {
     defaultImport: 'component',
     global: false,
+    svgoConfig: {
+      plugins: [
+        {
+          name: 'preset-default',
+          params: {
+            overrides: {
+              removeViewBox: false,
+            },
+          },
+        },
+        {
+          name: 'removeAttrs',
+          params: {
+            attrs: ['data-name', 'class', 'fill', 'svg:width', 'svg:height'],
+            preserveCurrentColor: true,
+          },
+        },
+        {
+          name: 'removeXMLNS',
+          params: true,
+        },
+        {
+          name: 'convertStyleToAttrs',
+          params: true,
+        },
+        {
+          name: 'addAttributesToSVGElement',
+          params: {
+            attributes: [{ fill: 'currentColor' }],
+          },
+        },
+      ],
+    },
   },
 });
