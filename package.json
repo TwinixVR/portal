@@ -11,7 +11,9 @@
     "prepare": "husky",
     "typecheck": "nuxt typecheck",
     "eslint": "eslint . --ext .vue,.js,.cjs,.mjs,.ts,.mts,.jsx,.tsx  --cache --ignore-path .gitignore .",
-    "eslint:fix": "yarn eslint --fix"
+    "eslint:fix": "yarn eslint --fix",
+    "stylelint": "stylelint  '**/*.{css,scss,vue,html}'",
+    "stylelint:fix": "yarn stylelint --fix"
   },
   "dependencies": {
     "nuxt": "^3.10.3",
