@@ -127,8 +127,10 @@ watchEffect(() => {
       min-block-size: var(--app-header-height);
       background: url('~/assets/imgs/idx_header_bg.png') 100% no-repeat;
       background-color: var(--app-nva-bg-color);
+      transition:
+        transform 0.3s ease,
+        background-color 0.2s ease-in;
       perspective: 1000px;
-
       .app-nav-container {
         display: flex;
         flex-flow: row wrap;
