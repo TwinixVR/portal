@@ -1,7 +1,11 @@
 <template>
   <div class="page-index">
-    <div class="section section-banner">
-      <div class="section-banner-inner">
+    <div ref="bannerRef" class="section section-banner">
+      <div ref="parallaxContainer" class="cover-parallax" :style="layerCoverStyle">
+        <div class="layer" :style="layer0Style"></div>
+      </div>
+      <div class="cover-filter"></div>
+      <div class="inner">
         <h1 class="banner-caption banner-caption--en">
           Provide professional solutions for <br />artificial intelligence, digital twins, metaverse, and 3D
           visualization applications
@@ -10,7 +14,7 @@
       </div>
     </div>
     <div class="section section-aboutus">
-      <div class="section-aboutus-inner">
+      <div class="inner">
         <div class="left">
           <img
             src="~/assets/imgs/1001.webp"
@@ -29,7 +33,7 @@
       </div>
     </div>
     <div class="section section-bussines">
-      <div class="section-bussines-inner">
+      <div class="inner">
         <h1 class="title">业务介绍</h1>
         <div class="subtitle">The Main Busines</div>
         <div class="desc">
@@ -46,70 +50,251 @@
               />
             </template>
           </Card>
+          <Card
+            class="card-bussines"
+            title="数字孪生"
+            description="智慧园区、智慧楼宇、智慧港口、智慧能源、 数字矿山、数字电厂 "
+          >
+            <template #cover>
+              <img
+                alt="数字孪生"
+                src="~/assets/imgs/1003.jpg"
+                srcset="~/assets/imgs/1003@2x.jpg 2x, ~/assets/imgs/1003.jpg 1x"
+              />
+            </template>
+          </Card>
+          <Card
+            class="card-bussines"
+            title="工农业元宇宙"
+            description="数字乡村可视化、农业数字孪生、数字大屏、 工业元宇宙 "
+          >
+            <template #cover>
+              <img
+                alt="工农业元宇宙"
+                src="~/assets/imgs/1004.jpg"
+                srcset="~/assets/imgs/1004@2x.jpg 2x, ~/assets/imgs/1004.jpg 1x"
+              />
+            </template>
+          </Card>
+          <Card
+            class="card-bussines"
+            title="AI+数字人"
+            description="AI+数字人、数字人生成平台、元宇宙数字人、 数字人交互"
+          >
+            <template #cover>
+              <img
+                alt="AI+数字人"
+                src="~/assets/imgs/1005.jpg"
+                srcset="~/assets/imgs/1005@2x.jpg 2x, ~/assets/imgs/1005.jpg 1x"
+              />
+            </template>
+          </Card>
+          <Card class="card-bussines" title="软件开发" description="小程序设计、APP设计、网站设计、 软件系统开发">
+            <template #cover>
+              <img
+                alt="软件开发"
+                src="~/assets/imgs/1006.jpg"
+                srcset="~/assets/imgs/1006@2x.jpg 2x, ~/assets/imgs/1006.jpg 1x"
+              />
+            </template>
+          </Card>
         </div>
       </div>
     </div>
     <div class="section section-advantages">
-      <div class="section-advantages-inner">
+      <div class="inner">
         <h1 class="title">公司优势</h1>
         <div class="subtitle">Company advantages</div>
-        <div class="desc"></div>
+        <div class="desc">
+          <div class="big">
+            <Card
+              class="card-advantages"
+              :hoverable="false"
+              :bordered="false"
+              title="专业的技术团队，丰富的行业经验 "
+              description="用专业服务每一名客户"
+            >
+              <template #cover>
+                <img
+                  alt="专业的技术团队，丰富的行业经验 "
+                  src="~/assets/imgs/1007.jpg"
+                  srcset="~/assets/imgs/1007@2x.jpg 2x, ~/assets/imgs/1007.jpg 1x"
+                />
+              </template>
+            </Card>
+          </div>
+          <div class="small">
+            <Card
+              class="card-advantages"
+              :hoverable="false"
+              :bordered="false"
+              title="成熟的产品体系，完善的售后服务 "
+              description="以实际行动表现新力量"
+            >
+              <template #cover>
+                <img
+                  alt="成熟的产品体系，完善的售后服务"
+                  src="~/assets/imgs/1008.jpg"
+                  srcset="~/assets/imgs/1008@2x.jpg 2x, ~/assets/imgs/1008.jpg 1x"
+                />
+              </template>
+            </Card>
+          </div>
+        </div>
       </div>
     </div>
     <div class="section section-cooperation">
-      <div class="section-cooperation-inner">
+      <div class="inner">
         <h1 class="title">合作机构</h1>
         <div class="subtitle">Cooperation institutions</div>
-        <div class="desc"></div>
+        <div class="desc">
+          <!-- <ul>
+            <li> <img alt="" src="~/assets/imgs/logo-zgyd.png" /></li>
+          </ul> -->
+          <div class="row">
+            <div><img alt="" src="~/assets/imgs/logo-zgyd.png" /></div>
+
+            <div><img alt="" src="~/assets/imgs/logo-crrc.png" /></div>
+
+            <div><img alt="" src="~/assets/imgs/logo-zgdx.png" /></div>
+
+            <div><img alt="" src="~/assets/imgs/logo-zhxt.png" /></div>
+          </div>
+          <div class="row">
+            <div><img alt="" src="~/assets/imgs/logo-cars.png" /></div>
+
+            <div><img alt="" src="~/assets/imgs/logo-zggd.png" /></div>
+
+            <div><img alt="" src="~/assets/imgs/logo-tjny.png" /></div>
+
+            <div><img alt="" src="~/assets/imgs/logo-zglt.png" /></div>
+          </div>
+          <!-- <div></div> -->
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script setup lang="ts">
 import { Card } from '#components';
+import { useElementBounding } from '@vueuse/core';
+import type { CSSProperties } from 'vue';
+import useParallax from '~/composables/useParallax';
+const parallaxContainer = ref<HTMLElement>();
+const bannerRef = ref<HTMLElement>();
+const MAX_MOVE = 24;
+const { roll, tilt } = useParallax(parallaxContainer);
+
+const layerBase: CSSProperties = {
+  // position: 'absolute',
+  transition: '.3s ease-out all',
+};
+const { width: bannerWidth } = useElementBounding(bannerRef);
+const layer0Style = computed(() => {
+  const scale = !tilt.value && !roll.value ? 1 : (2 * MAX_MOVE) / (bannerWidth.value || 9999) + 1;
+  return {
+    ...layerBase,
+    transform: `translate3d(${tilt.value * MAX_MOVE}px, ${roll.value * MAX_MOVE}px, 0) scale(${scale})`,
+    transformOrigin: 'center',
+  };
+});
+const layerCoverStyle = computed(() => ({
+  ...layerBase,
+}));
 </script>
 <style lang="scss">
 .page-index {
-  --page-text--xl: 36px;
-  --page-text--l: 30px;
-  --page-text--m: 20px;
-  --page-text--s: 18px;
-  --page-content-width: 85vw;
+  --page-text--xl: var(--app-text--xl);
+  --page-text--l: var(--app-text--l);
+  --page-text--m: var(--app-text--m);
+  --page-text--s: var(--app-text--s);
+  --page-content-width: var(--app-content-width);
+  --page-content-padding: var(--app-content-padding);
+  --app-size--6x: calc(var(--app-size--1x) * 6);
+  --page-gap: calc(var(--app-size--1x) * 4);
   scroll-margin-top: var(--app-shell-header-height);
   background-color: #f5f5f5;
   .section {
     .title {
-      font-size: var(--page-text--xl);
+      font-size: var(--page-text--l);
       font-weight: var(--app-font-weight--medium);
       color: var(--app-color--black);
     }
     .subtitle {
+      margin-bottom: var(--page-gap);
       font-size: var(--page-text--m);
       font-weight: var(--app-font-weight--normal);
       color: rgba(0, 0, 0, 0.5);
     }
+    > .inner {
+      max-width: var(--page-content-width);
+      padding-inline-start: var(--page-content-padding);
+      padding-inline-end: var(--page-content-padding);
+      margin: auto;
+    }
   }
   & > .section:not(:first-child) {
-    padding-top: 24px;
-    padding-bottom: 24px;
+    padding-top: var(--app-size--6x);
+    padding-bottom: var(--app-size--6x);
   }
 
   .section-banner {
+    --banner-cover-move: 0px;
+    --banner-cover-width: calc(100% + var(--banner-cover-move));
+    --banner-cover-height: calc(100% + var(--banner-cover-move));
+    --banner-height: calc(100vw * 900 / 1920);
+    position: relative;
+
     display: flex;
     flex: 1;
     flex-direction: row;
     align-items: center;
-    height: 85vh;
-    padding: 0 var(--app-size--3x);
-    background: url(~/assets/imgs/idx_bg.webp) 100% no-repeat;
-    background-color: #002638;
-    background-image: image-set(url(~/assets/imgs/idx_bg.webp) 1x, url(~/assets/imgs/idx_bg@2x.webp) 2x);
-    background-size: cover;
-    .section-banner-inner {
+    height: var(--banner-height);
+    overflow: hidden;
+    .cover-parallax {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background-color: #002638;
+      background-size: cover;
+      transform: translate3d(0, 0, 0) rotate(0.0001deg);
+      will-change: transform;
+      backface-visibility: hidden;
+      transform-style: preserve-3d;
+
+      > .layer {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url(~/assets/imgs/idx_bg.webp) no-repeat;
+        background-image: image-set(url(~/assets/imgs/idx_bg.webp) 1x, url(~/assets/imgs/idx_bg@2x.webp) 2x);
+        background-position: 100%;
+        background-size: cover;
+        transform-style: preserve-3d;
+      }
+    }
+    .cover-filter {
+      &::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        content: '';
+        background-color: rgba(0, 0, 0, 0.08);
+      }
+    }
+    .inner {
       padding-top: var(--app-shell-header-height);
       margin: auto;
       color: var(--app-color--white);
       text-align: center;
+      transform: translate3d(0, 0, 0);
+      perspective: 1000px;
       .banner-caption {
         font-size: var(--page-text--xl);
         font-weight: var(--app-font-weight--medium);
@@ -117,7 +302,7 @@ import { Card } from '#components';
         color: var(--app-color--white);
       }
       .banner-caption--en {
-        margin-bottom: calc(var(--app-size--1x) * 6);
+        margin-bottom: var(--app-size--6x);
         font-size: var(--page-text--m);
         line-height: 28px;
         color: rgba(255, 255, 255, 0.5);
@@ -126,10 +311,14 @@ import { Card } from '#components';
   }
 
   .section-aboutus {
-    .section-aboutus-inner {
+    .inner {
       display: grid;
       grid-template: 'left right' 1fr / 1fr 1fr;
-      grid-gap: 0 48px;
+      grid-gap: 0 var(--page-gap);
+      width: 100vw;
+      max-width: 100vw;
+      padding-inline-start: 0;
+      padding-inline-end: 0;
       .left {
         grid-area: left;
         img {
@@ -143,21 +332,72 @@ import { Card } from '#components';
         grid-area: right;
         justify-content: center;
         max-width: 28vw;
-        padding-inline-end: calc(var(--app-size--1x) * 8);
+        padding-inline-start: var(--page-gap);
+        padding-inline-end: var(--page-gap);
         .desc {
-          margin-top: 48px;
           font-size: var(--page-text--m);
           font-weight: var(--app-font-weight--normal);
         }
       }
     }
   }
-  @media screen and (max-height: 500px) {
-    .section-banner {
-      min-height: 500px;
-      background-size: 100%;
+  .section-bussines {
+    .inner {
+      .desc {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: var(--page-gap) var(--page-gap);
+      }
     }
   }
+  .section-advantages {
+    .inner {
+      .desc {
+        display: grid;
+        grid-template-columns: 3fr 2fr;
+        grid-gap: var(--page-gap) var(--page-gap);
+        > div {
+          overflow: hidden;
+        }
+        .card {
+          --card-title-text-size: var(--page-text--m);
+          --card-description-text-size: var(--page-text--s);
+        }
+      }
+    }
+  }
+  .section-cooperation {
+    .inner {
+      --pic-gap: 16px;
+      .desc {
+        display: flex;
+        flex-direction: column;
+        gap: var(--pic-gap);
+        .row {
+          display: flex;
+          flex: 0;
+          gap: var(--pic-gap);
+          align-items: center;
+          > div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 105px;
+            overflow: hidden;
+            background-color: #fff;
+            img {
+              display: block;
+              width: 95%;
+              height: auto;
+              max-height: fit-content;
+              object-fit: contain;
+            }
+          }
+        }
+      }
+    }
+  }
+
   @media screen and (min-width: 1920px) {
     .section-banner {
       .section-banner-inner {
