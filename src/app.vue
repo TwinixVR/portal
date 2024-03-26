@@ -1,7 +1,10 @@
 <template>
-  <NuxtLayout :name="layout">
-    <NuxtPage />
-  </NuxtLayout>
+  <div id="app">
+    <NuxtLayout :name="layout">
+      <NuxtLoadingIndicator />
+      <NuxtPage />
+    </NuxtLayout>
+  </div>
 </template>
 <script setup lang="ts">
 import type { PageMeta } from '#app';
@@ -14,12 +17,12 @@ const layout = ref<PageMeta['layout']>('desktop-default');
 <style lang="scss">
 @use '~/assets/styles/common';
 
-.page-enter-active,
+.fade-enter-active,
 .page-leave-active {
   transition: all 0.4s;
 }
-.page-enter-from,
-.page-leave-to {
+.fade-enter-from,
+.fade-leave-to {
   filter: blur(1rem);
   opacity: 0;
 }

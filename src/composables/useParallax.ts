@@ -32,7 +32,7 @@ const useParallax = (target: MaybeElementRef, options: ParallaxOption = {}): Par
   const currentX = ref(0);
   const currentY = ref(0);
 
-  const { lerpEase = 0.3, mouseTiltAdjust = (i) => i, mouseRollAdjust = (i) => i } = options;
+  const { lerpEase = 0.03, mouseTiltAdjust = (i) => i, mouseRollAdjust = (i) => i } = options;
 
   const {
     elementX: x,
@@ -44,16 +44,17 @@ const useParallax = (target: MaybeElementRef, options: ParallaxOption = {}): Par
   const update = (x: number, y: number) => {
     const diffX = Math.abs(x - currentX.value);
     const diffY = Math.abs(y - currentY.value);
-    if (diffX < 0.001 && diffY < 0.001) return;
+    if (diffX < 0.0001 && diffY < 0.0001) return;
     currentX.value = lerp(currentX.value, x, lerpEase);
     currentY.value = lerp(currentY.value, y, lerpEase);
     raf(() => update(x, y));
   };
 
   watchEffect(() => {
-    if (isOutside.value || (y.value == 0 && x.value == 0)) return;
-    const targetY = -(y.value - height.value) / height.value;
+    if (isOutside.value || (y.value <= 0.001 && x.value <= 0.001)) return;
+    const targetY = (y.value - height.value) / height.value;
     const targetX = (x.value - width.value) / width.value;
+
     raf(() => update(targetX, targetY));
   });
   const roll = computed(() => {

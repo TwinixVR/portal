@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="app-shell app-shell--desktop">
+  <div class="app-shell app-shell--desktop">
     <header class="app-shell-header">
       <slot name="header">
         <div ref="navbarRef" class="app-nav-bar" :class="navbarCls">

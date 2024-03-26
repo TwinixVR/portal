@@ -4,6 +4,7 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: '提供专业的人工智能、数字孪生、元宇宙、三维可视化应用解决方案',
+
       charset: 'utf-8',
       meta: [
         {
@@ -20,9 +21,15 @@ export default defineNuxtConfig({
           content:
             '提供专业的人工智能、数字孪生、元宇宙、三维可视化应用解决方案, 虚拟现实（XR）,数字孪生 ,工农业元宇宙 ,AI+数字人 ,软件开发',
         },
+        {
+          name: 'og:title',
+          content: '提供专业的人工智能、数字孪生、元宇宙、三维可视化应用解决方案',
+        },
       ],
       link: [{ rel: 'icon', type: 'image/svg+xml', href: '/fav.svg' }],
     },
+    pageTransition: { name: 'fade', mode: 'out-in' },
+    layoutTransition: { name: 'fade', mode: 'out-in' },
   },
   srcDir: 'src/',
   typescript: {

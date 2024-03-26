@@ -187,15 +187,15 @@ const { roll, tilt } = useParallax(parallaxContainer);
 
 const layerBase: CSSProperties = {
   // position: 'absolute',
-  transition: '.3s ease-out all',
+  transition: 'transform .3s ease-out',
 };
 const { width: bannerWidth } = useElementBounding(bannerRef);
 const layer0Style = computed(() => {
   const scale = !tilt.value && !roll.value ? 1 : (2 * MAX_MOVE) / (bannerWidth.value || 9999) + 1;
   return {
     ...layerBase,
-    transform: `translate3d(${tilt.value * MAX_MOVE}px, ${roll.value * MAX_MOVE}px, 0) scale(${scale})`,
-    transformOrigin: 'center',
+    transform: `translate3d(${-tilt.value * MAX_MOVE}px, ${-roll.value * MAX_MOVE}px, 0) scale(${scale})`,
+    transformOrigin: '50% bottom',
   };
 });
 const layerCoverStyle = computed(() => ({
@@ -221,10 +221,10 @@ const layerCoverStyle = computed(() => ({
       color: var(--app-color--black);
     }
     .subtitle {
+      margin-bottom: var(--page-gap);
       font-size: var(--page-text--m);
       font-weight: var(--app-font-weight--normal);
       color: rgba(0, 0, 0, 0.5);
-      margin-bottom: var(--page-gap);
     }
     > .inner {
       max-width: var(--page-content-width);
@@ -243,45 +243,45 @@ const layerCoverStyle = computed(() => ({
     --banner-cover-width: calc(100% + var(--banner-cover-move));
     --banner-cover-height: calc(100% + var(--banner-cover-move));
     --banner-height: calc(100vw * 900 / 1920);
+    position: relative;
 
     display: flex;
     flex: 1;
     flex-direction: row;
     align-items: center;
     height: var(--banner-height);
-    position: relative;
     overflow: hidden;
     .cover-parallax {
-      will-change: transform;
       position: absolute;
       width: 100%;
       height: 100%;
-      backface-visibility: hidden;
       pointer-events: none;
-      transform: translate3d(0, 0, 0) rotate(0.0001deg);
-      transform-style: preserve-3d;
       background-color: #002638;
       background-size: cover;
+      transform: translate3d(0, 0, 0) rotate(0.0001deg);
+      will-change: transform;
+      backface-visibility: hidden;
+      transform-style: preserve-3d;
 
       > .layer {
         position: relative;
-        top: 0;
-        left: 0;
+        // top: 0;
+        // left: 0;
         width: 100%;
         height: 100%;
-        transform-style: preserve-3d;
         background: url(~/assets/imgs/idx_bg.webp) no-repeat;
         background-image: image-set(url(~/assets/imgs/idx_bg.webp) 1x, url(~/assets/imgs/idx_bg@2x.webp) 2x);
-        background-size: cover;
         background-position: 100%;
+        background-size: cover;
+        transform-style: preserve-3d;
       }
     }
     .cover-filter {
       &::after {
-        display: block;
         position: absolute;
         top: 0;
         left: 0;
+        display: block;
         width: 100%;
         height: 100%;
         content: '';
@@ -293,8 +293,8 @@ const layerCoverStyle = computed(() => ({
       margin: auto;
       color: var(--app-color--white);
       text-align: center;
-      perspective: 1000px;
       transform: translate3d(0, 0, 0);
+      perspective: 1000px;
       .banner-caption {
         font-size: var(--page-text--xl);
         font-weight: var(--app-font-weight--medium);
@@ -312,13 +312,13 @@ const layerCoverStyle = computed(() => ({
 
   .section-aboutus {
     .inner {
+      display: grid;
+      grid-template: 'left right' 1fr / 1fr 1fr;
+      grid-gap: 0 var(--page-gap);
       width: 100vw;
       max-width: 100vw;
       padding-inline-start: 0;
       padding-inline-end: 0;
-      display: grid;
-      grid-template: 'left right' 1fr / 1fr 1fr;
-      grid-gap: 0 var(--page-gap);
       .left {
         grid-area: left;
         img {
@@ -332,8 +332,8 @@ const layerCoverStyle = computed(() => ({
         grid-area: right;
         justify-content: center;
         max-width: 28vw;
-        padding-inline-end: var(--page-gap);
         padding-inline-start: var(--page-gap);
+        padding-inline-end: var(--page-gap);
         .desc {
           font-size: var(--page-text--m);
           font-weight: var(--app-font-weight--normal);
@@ -379,16 +379,16 @@ const layerCoverStyle = computed(() => ({
           gap: var(--pic-gap);
           align-items: center;
           > div {
-            height: 105px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #fff;
+            height: 105px;
             overflow: hidden;
+            background-color: #fff;
             img {
-              height: auto;
               display: block;
               width: 95%;
+              height: auto;
               max-height: fit-content;
               object-fit: contain;
             }
