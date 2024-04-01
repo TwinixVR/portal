@@ -1,6 +1,6 @@
 <template>
   <NuxtLoadingIndicator />
-  <div :class="['error', `error-${statusCode}`]">
+  <div :class="['error', `error-${props.error?.statusCode}`]">
     <Error404 v-if="is404" :app-name="appConfig?.appName" @go-back="handleError">
       <template #action>
         <a class="button" @click="handleError"> 返回首页 </a>
@@ -9,7 +9,9 @@
     <Error500
       v-else
       :app-name="appConfig?.appName"
-      v-bind="{ statusCode, statusMessage, stack, data, description }"
+      :status-code="props.error?.statusCode"
+      :stack="props.error?.stack"
+      v-bind="props.error"
       @go-back="handleError"
     />
   </div>
@@ -46,9 +48,6 @@ const appConfig = useAppConfig();
 function handleError() {
   return clearError({ redirect: '/' });
 }
-const {
-  error: { statusCode, statusMessage, stack, data, description },
-} = toRefs(props);
 </script>
 <style lang="scss" scoped>
 .button {

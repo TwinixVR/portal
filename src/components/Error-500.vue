@@ -54,7 +54,13 @@ const handleError = () => {
   width: 100%;
   height: 100vh;
   text-align: center;
-
+  .stack {
+    padding: 20px;
+    overflow: auto;
+    color: crimson;
+    text-align: left;
+    background-color: #dedede;
+  }
   .action {
     display: flex;
     align-items: center;
