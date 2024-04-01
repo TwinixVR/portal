@@ -30,8 +30,20 @@ export default defineNuxtConfig({
     },
     pageTransition: { name: 'fade', mode: 'out-in' },
     layoutTransition: { name: 'fade', mode: 'out-in' },
+    rootId: '_app',
   },
   srcDir: 'src/',
+
+  vite: {
+    $client: {
+      build: {
+        assetsDir: 'assets',
+      },
+    },
+    build: {
+      assetsDir: 'assets',
+    },
+  },
   typescript: {
     typeCheck: false,
   },

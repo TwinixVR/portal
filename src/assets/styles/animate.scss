@@ -1,0 +1,20 @@
+@mixin _keyframes($name, $type-of-keyframes) {
+  @if $type-of-keyframes == to {
+    @keyframes #{$name} {
+      to {
+        @content;
+      }
+    }
+  } @else {
+    @keyframes #{$name} {
+      @content;
+    }
+  }
+}
+
+@mixin animation($name, $arguments, $type-of-keyframes) {
+  animation: $name $arguments;
+  @include _keyframes($name, $type-of-keyframes) {
+    @content;
+  }
+}

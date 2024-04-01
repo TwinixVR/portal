@@ -1,5 +1,5 @@
 export default defineAppConfig({
-  title: '',
+  appName: 'Twinix',
   // theme: {
   //   dark: true,
   //   colors: {

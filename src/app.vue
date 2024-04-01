@@ -1,17 +1,17 @@
 <template>
-  <div id="app">
-    <NuxtLayout :name="layout">
+  <div>
+    <NuxtLayout>
       <NuxtLoadingIndicator />
       <NuxtPage />
     </NuxtLayout>
   </div>
 </template>
 <script setup lang="ts">
-import type { PageMeta } from '#app';
+// import type { PageMeta } from '#app';
 
 // desktop-default| phone| pad
 // 可以基于 API 调用或登录状态进行选择
-const layout = ref<PageMeta['layout']>('desktop-default');
+// const layout = ref<PageMeta['layout']>('desktop-default');
 </script>
 
 <style lang="scss">

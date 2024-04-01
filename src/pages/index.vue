@@ -180,6 +180,9 @@ import { Card } from '#components';
 import { useElementBounding } from '@vueuse/core';
 import type { CSSProperties } from 'vue';
 import useParallax from '~/composables/useParallax';
+definePageMeta({
+  layout: 'desktop-default',
+});
 const parallaxContainer = ref<HTMLElement>();
 const bannerRef = ref<HTMLElement>();
 const MAX_MOVE = 24;
@@ -193,7 +196,7 @@ const { width: bannerWidth } = useElementBounding(bannerRef);
 const layer0Style = computed(() => {
   const scale = !tilt.value && !roll.value ? 1 : (2 * MAX_MOVE) / (bannerWidth.value || 9999) + 1;
   return {
-    ...layerBase,
+    // ...layerBase,
     transform: `translate3d(${-tilt.value * MAX_MOVE}px, ${-roll.value * MAX_MOVE}px, 0) scale(${scale})`,
     transformOrigin: '50% bottom',
   };
@@ -265,14 +268,13 @@ const layerCoverStyle = computed(() => ({
 
       > .layer {
         position: relative;
-        // top: 0;
-        // left: 0;
         width: 100%;
         height: 100%;
         background: url(~/assets/imgs/idx_bg.webp) no-repeat;
         background-image: image-set(url(~/assets/imgs/idx_bg.webp) 1x, url(~/assets/imgs/idx_bg@2x.webp) 2x);
         background-position: 100%;
         background-size: cover;
+        transition: transform ease-out 0.3s;
         transform-style: preserve-3d;
       }
     }

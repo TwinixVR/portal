@@ -91,7 +91,7 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-#app {
+#_app {
   padding: 0;
   margin: 0 auto;
 }
@@ -109,4 +109,17 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+@font-face {
+  font-family: 'Courgette';
+  src: url('../fonts/Courgette-Regular.ttf');
+}
+@font-face {
+  font-family: 'Silkscreen-Bold';
+  src: url('../fonts/Silkscreen/Silkscreen-Bold.ttf');
+}
+@font-face {
+  font-family: 'Silkscreen-Regular';
+  src: url('../fonts/Silkscreen/Silkscreen-Regular.ttf');
 }
