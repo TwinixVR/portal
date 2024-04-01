@@ -11,8 +11,8 @@
 </template>
 <script setup lang="ts">
 import { useHead } from '#imports';
-import Glitch from './Error/Glitch.vue';
-import GlitchText from './Error/GlitchText.vue';
+import Glitch from './error/Glitch.vue';
+import GlitchText from './error/GlitchText.vue';
 const props = withDefaults(
   defineProps<{
     appName?: string;

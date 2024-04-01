@@ -1,10 +1,10 @@
 <!-- eslint-disable vue/no-v-html -->
 <script setup lang="ts">
 import { useHead } from '#imports';
-import MixCircle from './Error/MixCircle.vue';
-import Torchlight from './Error/Torchlight.vue';
-import Spotlight from './Error/Spotlight.vue';
-import Glitch from './Error/Glitchy.vue';
+import MixCircle from './error/MixCircle.vue';
+import Torchlight from './error/Torchlight.vue';
+import Spotlight from './error/Spotlight.vue';
+import Glitch from './error/Glitchy.vue';
 const props = defineProps<{ appName?: string }>();
 useHead({
   title: `404 - Not Found | ${props.appName || ''}`,
